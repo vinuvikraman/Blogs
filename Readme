@@ -1,0 +1,10 @@
+1. For table we need to edit _sass/minima/_base.scss 
+For reducing height of a cell table{} -> tr { line-height:4px;}
+
+2. for loop creates individual tables for each of the values. To overcome this
+
+{% for gp in site.data.gp -%}
+|{{ gp.x }} | {{ gp.y}}                               
+{% endfor %}
+
+See the -% at the end of 'for gp in site.data.gp -%' NOT %
