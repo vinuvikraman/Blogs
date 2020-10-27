@@ -8,34 +8,34 @@ categories: jekyll update
 These are the most used words in different cuisines
 
 2. Chinese
-![Chinese](/assets/Chinese.png)
+![Chinese](/blogs/assets/Chinese.png)
 3. Indian
-![Indian](/assets/Indian.png)
+![Indian](/blogs/assets/Indian.png)
 4. Danish
-![Danish](/assets/Danish.png)
+![Danish](/blogs/assets/Danish.png)
 5. Mexican
-![Mexican](/assets/Mexican.png)
+![Mexican](/blogs/assets/Mexican.png)
 6. Southern
-![Southern](/assets/Southern.png)
+![Southern](/blogs/assets/Southern.png)
 7. Japanese
-![Japanese](/assets/Japanese.png)
+![Japanese](/blogs/assets/Japanese.png)
 8. Middleeastern
-![Middleeastern](/assets/Middleeastern.png)
+![Middleeastern](/blogs/assets/Middleeastern.png)
 9. Caribeean
-![Caribeean](/assets/Caribeean.png)
+![Caribeean](/blogs/assets/Caribeean.png)
 10. Russian
-![Russian](/assets/Russian.png)
+![Russian](/blogs/assets/Russian.png)
 11. French
-![French](/assets/French.png)
+![French](/blogs/assets/French.png)
 12. Swedish
-![Swedish](/assets/Swedish.png)
+![Swedish](/blogs/assets/Swedish.png)
 13. Ethiopia
-![Ethiopia](/assets/Ethiopia.png)
+![Ethiopia](/blogs/assets/Ethiopia.png)
 14. African
-![African](/assets/African.png)
+![African](/blogs/assets/African.png)
 15. Peru
-![Peru](/assets/Peru.png)
+![Peru](/blogs/assets/Peru.png)
 16. Brazil
-![Brazil](/assets/Brazil.png)
+![Brazil](/blogs/assets/Brazil.png)
 
 

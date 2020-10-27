@@ -18,11 +18,11 @@ I did my analysis on the crime data from [Boston open data hub](https://data.bos
 
 I have done the analysis based on the columns *OFFENSE_CODE_GROUP, OFFENSE_DESCRIPTION, YEAR	MONTH, HOUR, Lat and Long*. I found the per month crime for all the years and found that the number peaked in 2017 and it is decreasing by more than 250 cases per month in 2019. A figure (figure 1) is shown in the appendix. I removed motor vehicle accident response, medical assistance, towed etc unless otherwise notified. Based on this data the number of crime is decreasing as a linear function of year as shown in the following figure. I found the parameter of the linear function with slope -108. This means that number of crimes per month is decreasing at the rate of 108 during these years.   
 
-![year](/assets/per_month_crime_only.png)
+![year](/blogs/assets/per_month_crime_only.png)
 
 After that I studied the time dependence of crimes as a function of month. I found that the crime peaks between April and October. It peaks more than 500 during these months compared to rests. It was found that the result is similar for individual years also.  I assume that this behavior is as expected since during the summer time people go outside and unfortunately get more time to do minor/medium crime. 
 
-![Time](/assets/time_dependence_crime.png)
+![Time](/blogs/assets/time_dependence_crime.png)
 
 #### Temperature dependence of criminal activities
 
@@ -30,9 +30,9 @@ From the figure (figure 2) in appendix I found that the number of crimes is the 
 
 I calculate the number of monthly criminal activities and divide this by the total number of crimes in the respective year. E.g. NJ is the number of montly criminal activity in January 2015 and N is total number of criminal activities in 2015 then I calculate the fraction NJ/N. In this way I am normalizing the number of crimes for each number and removing the systematic caused during the temperature dependence on number of crimes. In the following figures I show the results
 
-![temperature-crime-1](/assets/temperature_crime_1.png)
+![temperature-crime-1](/blogs/assets/temperature_crime_1.png)
 
-![temperature-crime-2](/assets/temperature_crime_2.png)
+![temperature-crime-2](/blogs/assets/temperature_crime_2.png)
 
 Here there are several quatitative results in these figures. 
 
@@ -50,11 +50,11 @@ In all of the following geospatial figures I used three different plotting layer
 
 When I analyze this data I want to know where the most number of homicides are in Boston. So I have plotted the number of homicides not separated by years of crime. 
 
-![homicide](/assets/homicide.png)
+![homicide](/blogs/assets/homicide.png)
 
 I use spatial distribution of larceny. It shows that it is the largest in the Downtown and Back Bay areas. Larceny distribution is mostly uniform everywhere apart from the center of the city 
 
-![larceny](/assets/larceny.png)
+![larceny](/blogs/assets/larceny.png)
 
 A few different spatial distributions of crimes are shown in the appendix (figure 6). The main points from these figures
 
@@ -63,7 +63,7 @@ A few different spatial distributions of crimes are shown in the appendix (figur
 
 One of the most important crimes is substance use. There are 14 peaks for this crime in the city and those are very spatially congested. The following are the total cases 
 
-![drug](/assets/drug.png) 
+![drug](/blogs/assets/drug.png) 
 
 Based on the figures (figure 6) given in the appendix, I found that the number of peaks in the spatial distribution is lowest in class A and increased to class B. There are clear peaks on drug sales and manufacturers.
 
@@ -76,7 +76,7 @@ Obviously the spatial distribution of larceny from motor vehicles peaks in the c
 
 I analyze the correlation between the different crimes in the database. I estimate the number of crimes based on the hour it happens. Based on this number I can estimate what are the correlations between different crime groups. I removed crime codes such as Motor Vehicle Accident Response, Medical Assistance, Restraining Order Violations etc and crimes that have few in numbers. Eg. I don't use aircraft, human trafficking etc. I used 22 different groups for the correlation. This is shown here
 
-![correlation](/assets/correlation.png)
+![correlation](/blogs/assets/correlation.png)
 If the police force can find a number in the beginning of the day they can get an expected count of crime throughout the day.  
 
 
@@ -88,17 +88,17 @@ I found the time and temperature dependence of crime in Boston. I made spatial a
 ## Appendix
 ### Yearly crime dependance
 Figure 1
-![year-app](/assets/per_month_crime_total.png)
+![year-app](/blogs/assets/per_month_crime_total.png)
 Per monthly crime 
 
 ### Time dependence
 Figure 2
 
-![timecrimecon](/assets/time_crime_con.png)
+![timecrimecon](/blogs/assets/time_crime_con.png)
 
 ### Systematics of temperature dependance 
 Figure 3
-![temperature](/assets/temperature_dependence.png) 
+![temperature](/blogs/assets/temperature_dependence.png) 
 
 The above results show that even though the number of crimes decreases as a function of years one should take extreme caution during the summer time. This can be shown as a function of seasonal temperature in the appendix (figure 3)  
 
@@ -106,35 +106,35 @@ The below figure shows the similar results but it is as a function of hours in t
 
 
 Figure 4
-![hourly](/assets/crime_ratio_night_hours.png)
+![hourly](/blogs/assets/crime_ratio_night_hours.png)
 
 
 Figure 5
-![temperature-dependence-season.png](/assets/temperature_dependence_season.png)
+![temperature-dependence-season.png](/blogs/assets/temperature_dependence_season.png)
 
 ### Geospatial analysis
 Figure 6
-![other.png](/assets/other.png)
+![other.png](/blogs/assets/other.png)
 
-![aggravated.png](/assets/aggravated.png)
+![aggravated.png](/blogs/assets/aggravated.png)
 
-![auto-theft.png](/assets/auto_theft.png)
+![auto-theft.png](/blogs/assets/auto_theft.png)
 
-![harassment.png](/assets/harassment.png)
+![harassment.png](/blogs/assets/harassment.png)
 
-![robbery.png](/assets/robbery.png)
+![robbery.png](/blogs/assets/robbery.png)
 
-![residential-burglary.png](/assets/residential-burglary.png)
+![residential-burglary.png](/blogs/assets/residential-burglary.png)
 
-![simple-assault.png](/assets/simple-assault.png)
+![simple-assault.png](/blogs/assets/simple-assault.png)
 
-![commercial-burglary.png](/assets/commercial-burglary.png)
+![commercial-burglary.png](/blogs/assets/commercial-burglary.png)
 
-![vandalism.png](/assets/vandalism.png)
+![vandalism.png](/blogs/assets/vandalism.png)
 
-![missing-located.png](/assets/missing-located.png)
+![missing-located.png](/blogs/assets/missing-located.png)
 
-![missing-reported.png](/assets/missing-reported.png)
+![missing-reported.png](/blogs/assets/missing-reported.png)
 
 
 
