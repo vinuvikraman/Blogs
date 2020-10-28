@@ -7,7 +7,7 @@ categories: jekyll update
 
 I try to explain a step-by-step process of Gaussion process (GP) regression by a one dimentional numerial example. You might know the maths behind the GP but explain a few equations which is needed for the example.
 
-Lets say we have n independent features and one dependent variable. Independent features are $$x_{1} = [x_{11}, x_{12}, x_{13}], x_{2} = [x_{21}, x_{22}, x_{23}] $$ and dependent variable is $$y = [y_{1}, y_{2}, y_{3}]$$. This means we have a multivariable Gaussian of three variables. 
+Lets say we have $$n$$ independent features and one dependent variable. Independent features are $$x_{1} = [x_{11}, x_{12}, x_{13}], x_{2} = [x_{21}, x_{22}, x_{23}] $$ and dependent variable is $$y = [y_{1}, y_{2}, y_{3}]$$. This means we have a multivariable Gaussian of three variables. 
 GP regression is an 'interpolation' and gives errors based on a multivariate Gaussion distribution of dependent variable. 
 
 We are considering a function $$f(x_{1})$$ with $$x_{1}$$ as the independent variable. This means that $$f(x_{1})$$ has a normal errors, i.e. $$ e_{x11}, e_{x12}, e_{x13} $$ at $$x_1$$. There is another variable $$x_{2}$$ and $$f(x_{2})$$ has errors which is different from the errors $$f(x_{1})$$ and so on. What it is useful is that we need these errors to understand the multivariate Gaussion. Eg. we have only two variables and $$y(x_{11}, x_{21})$$ is observed in that surface of $$x_1$$ and $$x_{2}$$. If we have only one variable then as you that the normal error is in the 1D. However, for a
