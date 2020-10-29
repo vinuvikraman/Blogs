@@ -10,9 +10,44 @@ I try to explain a step-by-step process of Gaussion process (GP) regression by a
 Lets say we have $$n$$ independent features and one dependent variable. Independent features are $$x_{1} = [x_{11}, x_{12}, x_{13}], x_{2} = [x_{21}, x_{22}, x_{23}] $$ and dependent variable is $$y = [y_{1}, y_{2}, y_{3}]$$. This means we have a multivariable Gaussian of three variables. 
 GP regression is an 'interpolation' and gives errors based on a multivariate Gaussion distribution of dependent variable. 
 
-We are considering a function $$f(x_{1})$$ with $$x_{1}$$ as the independent variable. This means that $$f(x_{1})$$ has a normal errors, i.e. $$ e_{x11}, e_{x12}, e_{x13} $$ at $$x_1$$. There is another variable $$x_{2}$$ and $$f(x_{2})$$ has errors which is different from the errors $$f(x_{1})$$ and so on. What it is useful is that we need these errors to understand the multivariate Gaussion. Eg. we have only two variables and $$y(x_{11}, x_{21})$$ is observed in that surface of $$x_1$$ and $$x_{2}$$. If we have only one variable then as you that the normal error is in the 1D. However, for a
+We are considering a function $$f(x_{1})$$ with $$x_{1}$$ as the only one independent variable. If we don't have any errors in f(x) then the covariance in the GP can be written as
 
-Let's say we have a 1d example
+$$
+k(f(x), f(x')) = \sigma_f^2 \exp\left[\frac{-(f(x) - f(x'))^2}{2 l^2}\right]
+$$ 
+
+If the $$f(x)$$ and $$f(x')$$ are closer then we have the covariance is $$\sigma^2$$ and if they are furture away the effect of  $$f(x)$$ and $$f(x')$$ will be negligible. This clearly means that the effect of 'interpolation' is larger as the functions are closer and negligible effect when the functions are furthur apart. 
+
+We can explain this with a very simple example. Lets say $$f(x) = x + b$$. Then the above equation tells that 
+$$
+k(x, x') = \sigma_f^2 \exp\left[\frac{-(x - x')^2}{2 l^2}\right]
+$$ 
+
+When $$x$$ and $$x'$$ are closer then the interpolation effect is larger on $$f(x)$$ and if the distance between $$x$$ and $$x'$$ is larger then the effect of interpolation is negligible on $$f(x)$$.   
+
+However, in the real life we will have errors on the underlying function $$f(x)$$. Here we have observed values $$y = f(x) + N(0, \sigma_n^2)$$. $$N(0, \sigma_n^2)$$ is error on the observed values which is considered as normal. For simplicity we assume $$f(x) = x$$ which gives $$y = x + N(0, \sigma_n^2)$$. Based on this assumption we can write the covariance matrix of the oberved signal as 
+
+$$
+k(x, x') = \sigma_n^2 \exp\left[\frac{-(x - x')^2}{2 l^2}\right] + \sigma_n^2\delta(x, x')
+$$   
+
+Here $$\sigma_n^2 \delta(x, x')$$ comes based on the Gaussian assumption which has the variance $$\sigma_n^2$$ and $$\delta(x, x')$$ is because of the uncorrelated noise of different observations. 
+
+Now we go to the numerical example. Lets say we have ten observations which is shown in the below table. We also assume that the error on all the points is 0.3. However, the error can be different in different observation but I just assume it is a unique error. For this example we assume that $$\sigma_f=1.27$$ and $$l=1$$.
+
+We want to regress these observations to a point $$y^*$$ at $$x^*=0.2$$. If you remember the GP process the mean of $$y^*$$ is 
+
+$$
+\bar{y}^* = K_*K^{-1}y
+$$
+
+and variance is 
+
+$$
+var(y_*) = K_{∗∗} − K_∗K K_∗^T 
+$$
+
+Here $$K$$, $$K_*$$ and $$K_{**}$$ are the covariance matrix of observed data, observed to unknown value, covariance of unknown values which is $$y^*$$. We are going to some data which is in the table below. 
 
 <style>
 table {
@@ -27,61 +62,58 @@ table {
 |{{ gp.x }} | {{ gp.y}} 
 {% endfor %}  
 
+We can estimate the first diagonal element of K from the data 
+
+
+$$
+
+\begin{eqnarray}
+K_{x=-1.5, x=-1.5} &=& 1.27^2 \exp\left[\frac{-(-1.5 - -1.5)^2}{2l^2}\right] + 0.3^2  \nonumber \\
+&=& 1.7
+\end{eqnarray}
+
+$$
+
+The element in (1, 0) is
+
+$$
+
+K_{x=-1.5, x=-1.0} = 1.27^2 \exp\left[\frac{-(-1.5 - -1.0)^2}{2 l^2}\right] = 1.42
+
+$$
+
+$$\delta(x=-1.5, x=-1.0) = 0$$ because the independency of Gaussian noise. In silimar way we can compute all other elements for observed covariance matrix. 
+
+$$
+
+\begin{bmatrix}
+
+1.70 & 1.42 & 1.21 & 0.81 & 0.72 & 0.51\\
+1.42 & 1.70 & 1.56 & 1.34 & 1.21 & 0.97 \\
+1.21 & 1.56 & 1.70 & 1.51 & 1.42 & 1.21 \\
+0.81 & 1.34 & 1.51 & 1.70 & 1.59 & 1.48 \\
+0.72 & 1.21 & 1.42 & 1.59 & 1.70 & 1.56 \\
+0.51 & 0.97 & 1.21 & 1.48 & 1.56 & 1.70
+
+\end{bmatrix}
+
+$$
+
+We can estimate $$K_*$$ by replacing the $$x^*=0.2$$ in K. This implice that 
+
+$$
+
+K_*(x=x, x=0.2) = [0.38, 0.79, 1.03, 1.35, 1.46, 1.58] 
+
+$$ 
+
+Similarly, $$K_{**} = 1.27^2 + 0.3^2 = 1.70 $$. Here $$ K_{**} $$ is evaluating at $$x^{*}$$ then $$\delta(x^*, x^*) = 1$$ in the noise term. These values can put in to $$\bar(y)^*$$ which can be estimate as 0.8. The variance at $$x^*=0.2$$ is 0.20
+
+
+**Reference:** This is mostly taken from https://arxiv.org/abs/1505.02965
 
 
 
-I used text [data](/assets/recipes.csv) from [allrecipes](https://www.allrecipes.com) for this analysis. I have scraped food recipes of different cuisines from the website. Apart from the text I used a few different numerical parameters. After cleaning up the text I used a tokenizer to find the most used words in different cuisines. I found that pepper is the most popular ingredient in all the cuisines. I used TFIDF procedure to classify the recipes to different cuisines based on its ingredients.  I found that the correlation between cuisine can be found from confusion matrix based on their ingredients. You can view my analysis in this [Jupyter notebook](https://github.com/vinuvikraman/nlp/blob/master/recipes.ipynb)
-  
-
-## Future direction
-This project is equally fun and interesting. Currently, chefs are classifying the recipes based on their own cuisine. Even though there are closer ingredients found in recipes of different cuisines. There is also an increasing availability of fusion food. It will be interesting if we can classify the recipe to any cuisine  based on their ingredients.
-
-## Detailed figures and their explaination
-
-# Most used words in different cuisines
-
-* Words in these figures are appropriate for these cuisines. Here I show the number of words in Italian cuisins which have a lot of cheese, olive oil, black pepper etc. If you are interested to such figures from different cuisins please go to this [link]({% post_url 2019-07-29-recipes-more-figs %})
-
-![Italian](/assets/italian.png)
+Also we assume that $$f(x_{1})$$ has a normal errors which in this case $$ e_{x11}, e_{x12}, e_{x13} $$ in $$x_1$$. There is another variable $$x_{2}$$ and $$f(x_{2})$$ has errors which is different from the errors $$f(x_{1})$$ and so on. What it is useful is that we need these errors to understand the multivariate Gaussion. Eg. we have only two variables and $$y(x_{11}, x_{21})$$ is observed in that surface of $$x_1$$ and $$x_{2}$$. If we have only one variable then as you that the normal error is in the 1D. However, for a
 
 
-
-* I count the words in these cuisines and the distribition is shown. It was found that the pepper is the most used ingredients. However, most of the dishes don't use pepper or garlic as main ingredients but many use it for flavoring the recipe which makes pepper or garlic as their unavoidable ingredient. This result made me happier as I am from a part of India where the first ever pepper was traded in the world!
-
-![Word count](/assets/word_count.png)
-
-Please see in the bottom of this page to find out more count separated by other food related parameters such as calories, ratings etc
-
-
-# Modeling cuisins from ingredients
-* I use these word count to check whether I can classify their respective cuisines. I used scikit-learn TFIDF to find features from the ingredient. Then I found a model which classify cuisins from the ingredients. I have used a few different model on the TFIDF such as logistic regression, MultinomialNB based Bayasian and XGBoost. For these algorithms I obtained 0.56, 0.55 and 0.6 scores. I should remind you that the correlation matrix, as shown below, have identical ingredients which make the classification difficult. Since there are not much data I didn't want to go for cross validation.  
-
-# Confusion matrix
- 
-* Confusion matrix as correlation of ingredients between different cuisines
-
-![Confusion matrix](/assets/confusion_matrix_xgb.png)  
-
-After the classification I generated this interesting plot. I looked at the data and found that there are many sweet recipes in Danish cuisine. There are mostly similar ingredients in several sweet recipe. This confusion shows that for sweet recipes there are much more similarity in different cuisines. One of my future analysis is to remove sweet dishes.
-
-
-
-# More figures on word count
-* There are many recipes are in the high calorie area. I took recipies which gives calorie greater than 800 per person and found the ingredients. You can find some of the ingredients from all recipes but many product from milk, oil are in top list.
- 
-![High Calorie Word count](/assets/high_calorie_word_count.png)
-
-* Found words from recipes which are highly rated
-
-![High rating word count](/assets/high_review_word_count.png)
-
-* Found words from recipes which are highly made (> 5000). It is found that the words are mostly matching the sweet recipes.  
-
-![High made word count](/assets/high_made_word_count.png)
-
-* Found words from recipes which are highly rated (>= 4). 
-
-![Highly rated word count](/assets/high_review_word_count.png)
-
-
- 
